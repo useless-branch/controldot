@@ -1,9 +1,6 @@
-[submodule "external/CRCpp"]
-	path = external/CRCpp
-	url = git@github.com:d-bahr/CRCpp.git
 [submodule "external/firmdot"]
 	path = external/firmdot
-	url = git@github.com:useless-branch/firmdot
+	url = git@github.com:useless-branch/firmdot.git
 [submodule "aglio"]
 	path = aglio
 	url = git@dominicp.de:aglio
@@ -13,3 +10,6 @@
 [submodule "toxic_spokes"]
 	path = toxic_spokes
 	url = git@dominicp.de:toxic_spokes
+[submodule "mcufont"]
+	path = mcufont
+	url = git@dominicp.de:mcufont

@@ -41,6 +41,13 @@ add_subdirectory(external/CRCpp)
 add_subdirectory(aglio)
 add_subdirectory(recreated_goon)
 
+add_subdirectory(mcufont)
+
+mcufont_generate(sub_font
+        FONT Hack-Regular.ttf
+        SIZE 8
+        ITERATIONS 20
+        RANGES 0-127)
 
 recreated_goon_generate(
         type_descriptors
@@ -49,16 +56,16 @@ recreated_goon_generate(
         FILES external/firmdot/src/package.hpp
 )
 
-target_link_libraries(ControlDot PRIVATE
-    toxic_spokes::sockets
+mcufont_add_library(ControlDot FONTS sub_font)
+
+target_link_libraries(ControlDot
+    toxic_spokes::toxic_spokes
     fmt::fmt-header-only
     Threads::Threads
     aglio::aglio
     ${SDL2_LIBRARIES}
     type_descriptors
-    ${OpenCV_LIBS}
         )
-
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 

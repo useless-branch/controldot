@@ -5,9 +5,10 @@
 #include "Panel.hpp"
 #include "UART.hpp"
 #include "aglio/packager.hpp"
-#include "firmdot/src/package.hpp"
 #include "firmdot/src/BinaryUtility.hpp"
+#include "firmdot/src/package.hpp"
 
+#include <algorithm>
 #include <cstddef>
 #include <stop_token>
 #include <thread>
@@ -65,6 +66,28 @@ struct Display {
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
+    }
+
+    void setImage(std::vector<std::uint8_t> const& image) {
+        for(std::size_t x{}; x < 2*28; ++x) {
+            for(std::size_t y{}; y < 24; ++y) {
+                std::size_t panelNo{x / 28};
+                if(panelNo > panels.size()) {
+                    return;
+                }
+                std::size_t xPos{x%28};
+                std::size_t currentPixel{y * 28*2 + x};
+                std::size_t currentByte{currentPixel / 8};
+                std::size_t currentPosInByte{currentPixel % 8};
+                bool        state = binUtil::checkBit(image[currentByte], currentPosInByte);
+                //fmt::print("Setting Pixel ({},{}) on panel {} to {}\n", xPos,y,panelNo,state);
+                
+                panels[panelNo].setPixel(xPos, y, state);
+            }
+        }
+        fmt::print("Image data: {}\n", fmt::join(image, ", "));
+        fmt::print("Panel 0 Data: {}\n", fmt::join(panels[0].panelData, ", "));
+        fmt::print("Panel 1 Data: {}\n", fmt::join(panels[1].panelData, ", "));
     }
 
     std::jthread _flushThread{&Display::flush, this};
