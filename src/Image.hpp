@@ -3,7 +3,12 @@
 #include <string>
 #include <cassert>
 #include "mcufont.h"
-#include "sub_font.h"
+#include "main_font_9.h"
+#include "main_font_11.h"
+#include "main_font_16.h"
+#include "main_font_16_bold.h"
+#include "main_font_12_bold.h"
+
 
 struct Image {
     std::size_t               width;

@@ -64,7 +64,7 @@ struct Display {
                 packager::pack(txBuffer, txPack);
                 uart.sendData(txBuffer);
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }
     }
 
@@ -85,9 +85,9 @@ struct Display {
                 panels[panelNo].setPixel(xPos, y, state);
             }
         }
-        fmt::print("Image data: {}\n", fmt::join(image, ", "));
-        fmt::print("Panel 0 Data: {}\n", fmt::join(panels[0].panelData, ", "));
-        fmt::print("Panel 1 Data: {}\n", fmt::join(panels[1].panelData, ", "));
+        //fmt::print("Image data: {}\n", fmt::join(image, ", "));
+        //fmt::print("Panel 0 Data: {}\n", fmt::join(panels[0].panelData, ", "));
+        //fmt::print("Panel 1 Data: {}\n", fmt::join(panels[1].panelData, ", "));
     }
 
     std::jthread _flushThread{&Display::flush, this};

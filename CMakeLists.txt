@@ -37,16 +37,39 @@ add_executable(ControlDot
     src/main.cpp)
 
 add_subdirectory(toxic_spokes)
-add_subdirectory(external/CRCpp)
 add_subdirectory(aglio)
 add_subdirectory(recreated_goon)
 
 add_subdirectory(mcufont)
 
-mcufont_generate(sub_font
-        FONT Hack-Regular.ttf
-        SIZE 8
-        ITERATIONS 20
+mcufont_generate(main_font_9
+        FONT UbuntuMono-R.ttf
+        SIZE 9
+        ITERATIONS 80
+        RANGES 0-127)
+
+mcufont_generate(main_font_11
+        FONT UbuntuMono-R.ttf
+        SIZE 11
+        ITERATIONS 80
+        RANGES 0-127)
+
+mcufont_generate(main_font_16
+        FONT UbuntuMono-R.ttf
+        SIZE 16
+        ITERATIONS 80
+        RANGES 0-127)
+
+mcufont_generate(main_font_16_bold
+        FONT UbuntuMono-B.ttf
+        SIZE 16
+        ITERATIONS 80
+        RANGES 0-127)
+
+mcufont_generate(main_font_12_bold
+        FONT UbuntuMono-B.ttf
+        SIZE 12
+        ITERATIONS 80
         RANGES 0-127)
 
 recreated_goon_generate(
@@ -56,7 +79,7 @@ recreated_goon_generate(
         FILES external/firmdot/src/package.hpp
 )
 
-mcufont_add_library(ControlDot FONTS sub_font)
+mcufont_add_library(ControlDot FONTS main_font_9 main_font_11 main_font_16 main_font_16_bold main_font_12_bold)
 
 target_link_libraries(ControlDot
     toxic_spokes::toxic_spokes
