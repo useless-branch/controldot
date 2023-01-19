@@ -64,7 +64,7 @@ struct Display {
                 packager::pack(txBuffer, txPack);
                 uart.sendData(txBuffer);
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
     }
 

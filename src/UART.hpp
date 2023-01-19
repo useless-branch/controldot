@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ControlCharacters.hpp"
-#include "serial.hpp"
 
 #include <chrono>
 #include <concepts>
@@ -19,7 +18,7 @@
 
 
 template<typename Serial>
-requires requires(
+/*requires requires(
   Serial                                 s,
   std::byte*                             p,
   std::size_t                            ss,
@@ -34,15 +33,15 @@ requires requires(
     {
         s.can_recv(dur)
         } -> std::same_as<bool>;
-}
+}*/
 struct UART {
     std::string                  _dev;
-    Serial                       _conn{_dev, B115200};
+    Serial                       _conn{_dev, 115200};
     std::vector<std::byte>       _fifo{};
     static constexpr std::size_t MaxPackageSize{300};
 
     void sendData(std::span<const std::byte> data) {
-        _conn.send(data.data(), data.size());
+        _conn.send_nonblocking(data);
     }
 
     void receiveThreadFunc() {

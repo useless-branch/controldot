@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <cstdint>
 #include <string>
@@ -8,6 +10,7 @@
 #include "main_font_16.h"
 #include "main_font_16_bold.h"
 #include "main_font_12_bold.h"
+#include "main_font_20_bold.h"
 
 
 struct Image {
@@ -28,6 +31,11 @@ struct Image {
             ret[i] = data[i] & other.data[i];
         }
         return ret;
+    }
+
+    void merge(Image const& other){
+        data.resize(other.data.size());
+        std::memcpy(data.data(), other.data.data(), other.data.size());
     }
 
     void putPixel(std::size_t x, std::size_t y, bool value) {

@@ -13,3 +13,6 @@
 [submodule "mcufont"]
 	path = mcufont
 	url = git@dominicp.de:mcufont
+[submodule "json"]
+	path = json
+	url = git@github.com:nlohmann/json.git
